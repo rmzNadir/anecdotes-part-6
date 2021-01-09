@@ -23,11 +23,16 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_VOTE':
       const id = action.data.id;
+
       const anecdote = state.find((a) => a.id === id);
 
-      return state.map((a) =>
-        a.id === id ? { ...anecdote, votes: anecdote.votes + 1 } : a
-      );
+      const updatedArr = state
+        .map((a) =>
+          a.id === id ? { ...anecdote, votes: anecdote.votes + 1 } : a
+        )
+        .sort((a, b) => parseFloat(b.votes) - parseFloat(a.votes));
+
+      return updatedArr;
 
     case 'NEW_ANECDOTE':
       return [...state, action.data];
