@@ -1,15 +1,24 @@
-const notificationReducer = (state = 'skere', action) => {
+const notificationReducer = (state = '', action) => {
   switch (action.type) {
-    case 'SET_MESSAGE':
+    case 'SET_NOTIFICATION':
       return action.message;
+    case 'REMOVE_NOTIFICATION':
+      return '';
     default:
       return state;
   }
 };
 
-export const setNotificationMessage = (message) => {
+export const setNotification = (message) => {
   return {
-    type: 'SET_MESSAGE',
+    type: 'SET_NOTIFICATION',
+    message,
+  };
+};
+
+export const removeNotification = (message) => {
+  return {
+    type: 'REMOVE_NOTIFICATION',
     message,
   };
 };

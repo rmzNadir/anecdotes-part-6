@@ -10,7 +10,7 @@ const Notification = () => {
     borderWidth: 1,
   };
 
-  return <div style={style}>{title}</div>;
+  return title !== '' && <div style={style}>{title}</div>;
 };
 
 export default Notification;
