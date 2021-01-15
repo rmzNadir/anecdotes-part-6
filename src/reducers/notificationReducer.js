@@ -9,14 +9,19 @@ const notificationReducer = (state = '', action) => {
   }
 };
 
+let timer;
+
 export const setNotification = (content, duration) => {
   return (dispatch) => {
+    // Timer gets cleaned so every notification has the same duration.
+    clearTimeout(timer);
+
     dispatch({
       type: 'SET_NOTIFICATION',
       content,
     });
 
-    setTimeout(
+    timer = setTimeout(
       () => {
         dispatch({ type: 'REMOVE_NOTIFICATION' });
       },
