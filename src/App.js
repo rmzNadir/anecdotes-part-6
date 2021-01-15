@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { initializeAnecdotes } from './reducers/anecdoteReducer';
-import anecdotesService from './services/anecdotes';
 import { useDispatch } from 'react-redux';
 
 /* Componentes */
