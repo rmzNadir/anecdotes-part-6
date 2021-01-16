@@ -11,7 +11,7 @@ const AnecdoteForm = (props) => {
 
     props.createAnecdote(content);
 
-    props.setNotification(`Anecdote: '${content}' successfully created!`, 3.5);
+    props.setNotification(`Anecdote: '${content}' successfully created!`, 5);
   };
 
   return (

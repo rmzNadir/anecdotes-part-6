@@ -16,7 +16,7 @@ const AnecdoteList = (props) => {
   const vote = (anecdote) => {
     const { content } = anecdote;
     props.addVote(anecdote);
-    props.setNotification(`You voted '${content}'`, 3.5);
+    props.setNotification(`You voted '${content}'`, 5);
   };
 
   return (
