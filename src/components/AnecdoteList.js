@@ -1,22 +1,22 @@
 import React from 'react';
 import Filter from '../components/Filter';
-import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { addVote } from '../reducers/anecdoteReducer';
 import { setNotification } from '../reducers/notificationReducer';
 
-const AnecdoteList = () => {
-  const dispatch = useDispatch();
+const AnecdoteList = (props) => {
+  const { anecdotes } = props;
   // Filter the anecdotes based on the filter value
-  const anecdotes = useSelector(({ anecdotes, filter }) =>
-    anecdotes.filter(({ content }) =>
-      content.toLowerCase().includes(filter.toLowerCase())
-    )
-  );
+  // const anecdotes = useSelector(({ anecdotes, filter }) =>
+  //   anecdotes.filter(({ content }) =>
+  //     content.toLowerCase().includes(filter.toLowerCase())
+  //   )
+  // );
 
   const vote = (anecdote) => {
     const { content } = anecdote;
-    dispatch(addVote(anecdote));
-    dispatch(setNotification(`You voted '${content}'`, 3.5));
+    props.addVote(anecdote);
+    props.setNotification(`You voted '${content}'`, 3.5);
   };
 
   return (
@@ -39,4 +39,22 @@ const AnecdoteList = () => {
   );
 };
 
-export default AnecdoteList;
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes.filter(({ content }) =>
+      content.toLowerCase().includes(state.filter.toLowerCase())
+    ),
+  };
+};
+
+const mapDispatchToProps = {
+  addVote,
+  setNotification,
+};
+
+const ConnectedAnecdoteList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AnecdoteList);
+
+export default ConnectedAnecdoteList;
